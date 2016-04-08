@@ -8,7 +8,7 @@ def is_liked_product(product, user):
     :return True if user already like current product
     """
     return user.is_authenticated() and Like.objects.filter(
-            user=user, product=product).exists()
+        user=user, product=product).exists()
 
 
 def ajax_required(f):

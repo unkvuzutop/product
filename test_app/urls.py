@@ -11,4 +11,3 @@ urlpatterns = [
         {'next_page': '/'}, name='auth_logout'),
     url(r'^', include(product_urls))
 ]
-

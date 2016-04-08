@@ -1,5 +1,4 @@
 import os
-import logging
 import sys
 
 DEBUG = True
@@ -106,7 +105,7 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers':['file'],
+            'handlers': ['file'],
             'propagate': True,
             'level': 'DEBUG',
         },
@@ -118,6 +117,6 @@ LOGGING = {
 }
 
 if DEBUG:
-    from settings_dev import *
+    from settings_dev import *  # noqa
 else:
-    from settings_prod import *
+    from settings_prod import *  # noqa
