@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+    <script src="{% static 'js/order.js' %}"></script>
+{% endblock extra_head %}
+
+{% block content %}
+    Order by:
+    <select class="selectpicker">
+        {% with request.GET.order_by as active_order %}
+            <option value="name" {% if active_order == 'name' %}selected{% endif %}>Name, A-Z</option>
+            <option value="-name" {% if active_order == '-name' %}selected{% endif %}>Name, Z-A</option>
+            <option value="like_count" {% if active_order == 'like_count' %}selected{% endif %}>Like, 0-9</option>
+            <option value="-like_count" {% if active_order == '-like_count' %}selected{% endif %}>Like, 9-0</option>
+        {% endwith %}
+    </select>
+    <div class="clear"></div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <td>Product name</td>
+            <td>Description</td>
+            <td>Price</td>
+            <td>likes</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for product in object_list %}
+            <tr>
+                <td><a href="{% url 'product_detail' product.slug %}">{{ product.name }}</a></td>
+                <td>{{ product.description}}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.like_set.count }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% include 'includes/pagination.html' %}
+
+{% endblock content %}

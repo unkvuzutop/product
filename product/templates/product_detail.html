@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load product_tags %}
+
+{% block extra_head %}
+    <script src="{% static 'js/jquery.cookie-1.4.1.js' %}"></script>
+    <script src="{% static 'js/csrf.js' %}"></script>
+    <script src="{% static 'js/like.js' %}"></script>
+    <script>
+    var productId = {{ product.id }};
+    </script>
+{% endblock extra_head %}
+    {% block content %}
+        <row>
+        <div class="message-row">
+            <ul id="'messages" class="messages">
+                {% if messages %}
+                    {% for message in messages %}
+                        <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                            {{ message }}
+                        </p>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </div>
+            <h3 class="text-uppercase">{{ product.name|safe }}</h3>
+            <p class="text-left"><strong>Description:</strong> {{ product.description|safe }}</p>
+            <p class="text-left"><strong>Price:</strong> {{ product.price }}</p>
+            <p class="text-left"><strong>Like</strong>
+                {% if user and user.is_authenticated %}
+                    <input data-product_id={{ product.id }} type="checkbox" class="send-like" {% is_liked product 'checked' '' %}>
+                {% endif %}
+                <span id="like_for_{{product.id}}">{{ product.like_set.count }}</span></p>
+        </row>
+        <div class="row">
+        {% include 'includes/comments_form.html' %}
+        </div>
+        <hr class="divider">
+        <div class="clear-big"></div>
+        <div class="row">
+        <div class="col-md-12 col-xs-2"></div>
+        <div class="col-md-12 col-xs-8">
+            {% with product.last_comments as comments %}
+                {% include 'includes/comments_list.html' %}
+            {% endwith %}
+        </div>
+        <div class="col-md-12 col-xs-2"></div>
+        </div>
+    {% endblock %}

@@ -1,0 +1,45 @@
+.navbar-inverse .navbar-nav>li>a {
+  color: #dddddd;
+}
+
+.navbar-inverse {
+    background-color: #6884D9;
+    border-color: #6884D9;
+}
+
+body {
+    padding-top: 80px;
+}
+
+.clear {
+    height: 20px;
+}
+
+.clear-big {
+    height: 60px;
+}
+
+.error {
+    color:#a94442;
+}
+
+.success {
+    color: green;
+}
+
+.messages {
+    min-height: 20px;
+}
+
+.comment {
+    width: 100%;
+    text-align: center;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.message-row {
+    min-height: 30px;
+}

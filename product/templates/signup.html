@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form  method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="row">
+                <div class="form-group {% if field.errors %}has-error{% endif %} col-sm-offset-4">
+                    <label for="{{ field.id_for_label }}" class="col-sm-1 control-label">{{ field.label }}</label>
+                    <div class="col-sm-6 col-sm-offset-1">
+                        <input type="text" class="form-control" id="{{ field.id_for_label }}" name="{{ field.name }}" value="{% if field.value %}{{ field.value }}{% endif %}">
+                        {% if field.errors %}
+                            <p class="text-danger"> {{ field.errors|join:'<br />' }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="clear"></div>
+        <div class="row">
+            <div class="control-group col-sm-offset-4">
+                <div class="col-md-6 col-xs-3">
+                    <input id="submit" name="submit" type="submit" value="Apply" class="btn btn-primary">
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

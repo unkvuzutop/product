@@ -1,0 +1,45 @@
+<h4>Add comment</h4>
+<div class="col-md-8 col-sm-offset-4">
+    <form class="form-horizontal" role="form" method="post">
+        {% csrf_token %}
+        {% if not user.is_authenticated %}
+            <div class="row">
+                <div class="control-group error  {% if form.name.errors %}has-error{% endif %}">
+                    <div class="controls">
+                        <div class="col-md-6 col-xs-3">
+                            <input type="text" class="form-control" id="{{ form.name.id_for_label }}" name="name" placeholder="{{ form.name.label }}" value="{% if form.name.value %}{{ form.name.value }}{% endif %}">
+                        </div>
+                        <div class="col-md-5 col-xs-6">
+                            {% if form.name.errors %}
+                                <p class="text-danger"> {{ form.name.errors|join:'<br />' }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <div class="clear"></div>
+        <div class="row">
+            <div class="control-group error {% if form.text.errors %}has-error{% endif %}">
+                <div class="controls">
+                    <div class="col-md-6 col-xs-3">
+                        <textarea class="form-control" rows="4" id="{{ form.text.id_for_text }}" name="text" placeholder="Enter your text here">{% if form.text.value %}{{ form.text.value }}{% endif %}</textarea>
+                    </div>
+                    <div class="col-md5 col-xs-6">
+                        {% if form.text.errors %}
+                            <span class="text-danger">{{ form.text.errors|join:'<br />' }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="row">
+            <div class="control-group error">
+                <div class="col-md-6 col-xs-3">
+                    <input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

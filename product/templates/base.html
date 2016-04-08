@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% block head %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Products App{% endblock %}</title>
+        <script src="{% static 'js/jquery.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+        <link href="{% static 'css/custom.css' %}" rel="stylesheet" type="text/css" >
+    {% endblock head %}
+
+    {% block extra_head %}{% endblock extra_head %}
+</head>
+
+<body>
+{% block nav %}
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'home' %}"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a class="menu" href="{% url 'home' %}">Home</a></li>
+                    <li><a class="menu" href="{% url 'product_list' %}">Products</a></li>
+                    <li><a class="menu" href="{% url 'admin:index' %}">Admin</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a class="logout" href="{% url 'auth_logout' %}">LogOut</a></li>
+                    {% else %}
+                        <li><a class="login" href="{% url 'login' %}?next={% url 'home' %}">LogIn</a></li>
+                        <li><a class="signup" href="{% url "sign_up" %}">SignUp</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock nav %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                {% block content %}{% endblock content %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
