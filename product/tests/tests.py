@@ -109,7 +109,10 @@ class ProductTestCase(TestCase):
         self.assertEqual(
             likes, Like.objects.filter(product=self.product).count())
 
-    def test_get_request_diallowed_for_like(self):
+    def test_get_request_disallowed_for_like(self):
+        """
+        check is GET request disallowed
+        """
         self.login()
         response = self.client.get(
             reverse('like', args=[self.product.id]))
