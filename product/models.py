@@ -9,7 +9,7 @@ from django.utils import timezone
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
-    slug = models.CharField(max_length=220, null=False, blank=True)
+    slug = models.SlugField(max_length=200, unique=True)
     description = models.TextField(null=False, blank=True)
     price = models.DecimalField(max_digits=16, decimal_places=2)
     created_at = models.DateTimeField(default=timezone.now, editable=False)
